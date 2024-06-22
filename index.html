@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Canvas with Spline</title>
+    <style>
+        #canvas3d {
+            width: 100%;
+            height: 500px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas3d"></canvas>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script type="module">
+        import { Application } from 'https://unpkg.com/@splinetool/runtime@1.7.5/build/runtime.js';
+
+        console.log("Script Loaded");
+
+        const canvas = document.getElementById('canvas3d');
+        const app = new Application(canvas);
+
+        app.load('https://prod.spline.design/5liLw97CzcWGm3LO/scene.splinecode')
+            .then(() => {
+                console.log("Spline scene loaded");
+
+                const socket = io('http://localhost:3000');
+
+                socket.on('connect', () => {
+                    console.log('Connected to Socket.IO server');
+                });
+
+                socket.on('updateVariables', variables => {
+                    console.log('Variables update received:', variables);
+                    app.setVariable('cream', variables.cream);
+                    app.setVariable('white', variables.white);
+                    app.setVariable('black', variables.black);
+                    app.setVariable('blue', variables.blue);
+                    app.setVariable('red', variables.red);
+                });
+
+                socket.on('disconnect', () => {
+                    console.log('Disconnected from Socket.IO server');
+                });
+
+                socket.on('connect_error', (error) => {
+                    console.error('Connection Error:', error);
+                });
+
+                socket.on('connect_timeout', (timeout) => {
+                    console.error('Connection Timeout:', timeout);
+                });
+            })
+            .catch(error => {
+                console.error('Error loading Spline scene:', error);
+            });
+    </script>
+</body>
+</html>
