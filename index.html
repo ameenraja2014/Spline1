@@ -33,15 +33,29 @@
                     console.log('Connected to Socket.IO server');
                 });
 
-                socket.on('updateVariables', variables => {
+              
+
+socket.on('updateVariables', variables => {
                     console.log('Variables update received:', variables);
                     app.setVariable('cream', variables.cream);
+                });
+socket.on('updateVariables', variables => {
+                    console.log('Variables update received:', variables);
                     app.setVariable('white', variables.white);
+                });
+socket.on('updateVariables', variables => {
+                    console.log('Variables update received:', variables);
                     app.setVariable('black', variables.black);
+                });
+socket.on('updateVariables', variables => {
+                    console.log('Variables update received:', variables);
                     app.setVariable('blue', variables.blue);
+                });
+socket.on('updateVariables', variables => {
+                    console.log('Variables update received:', variables);
                     app.setVariable('red', variables.red);
                 });
-
+                
                 socket.on('disconnect', () => {
                     console.log('Disconnected from Socket.IO server');
                 });
