@@ -5,10 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D Canvas with Spline</title>
     <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevent scroll bars */
+            height: 100%;
+            width: 100%;
+        }
         #canvas3d {
             width: 100%;
-            height: 500px;
-            border: 1px solid #ccc;
+            height: 100%;
+            display: block; /* Remove border and scroll */
         }
     </style>
 </head>
@@ -40,7 +47,7 @@
                     app.setVariable('black', variables.black);
                     app.setVariable('blue', variables.blue);
                     app.setVariable('red', variables.red);
-					app.setVariable('yellow', variables.yellow);
+                    app.setVariable('yellow', variables.yellow);
                 });
 
                 socket.on('disconnect', () => {
