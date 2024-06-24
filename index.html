@@ -33,18 +33,16 @@
                     console.log('Connected to Socket.IO server');
                 });
 
-              
-
- socket.on('updateVariables', variables => {
+                socket.on('updateVariables', variables => {
                     console.log('Variables update received:', variables);
                     app.setVariable('cream', variables.cream);
                     app.setVariable('white', variables.white);
                     app.setVariable('black', variables.black);
                     app.setVariable('blue', variables.blue);
                     app.setVariable('red', variables.red);
+					app.setVariable('yellow', variables.yellow);
                 });
 
-                
                 socket.on('disconnect', () => {
                     console.log('Disconnected from Socket.IO server');
                 });
